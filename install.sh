@@ -36,10 +36,13 @@ helm upgrade --values ./values.yaml  \
  --set twi.pinboard.token=$PINBOARD_TOKEN \
  --set twi.twitter.client_key=${TWITTER_CLIENT_KEY} \
  --set twi.twitter.client_key_secret=${TWITTER_CLIENT_KEY_SECRET} \
- --set twi.feed.ingest.mappings="$( cat $HOME/Desktop/feed-mappings.json | base64 )" \
+ --set twi.ingest.feed.mappings="$( cat $HOME/Desktop/feed-mappings.json | base64 )" \
+ --set twi.ingest.twitter.mappings="$( cat $HOME/Desktop/ttd-twitter-mappings.json | base64 )" \
  --namespace $NS  \
  twi-${NS}-helm-chart . 
 
+
+# TODO restore this _AFTER_ youve ensured youre reading config in the same way as you are feed ingest configuration
 kubectl create job --from=cronjob/ttd-twi-twitter-ingest-cronjob ttd-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
 kubectl create job --from=cronjob/ttd-twi-bookmark-ingest-cronjob ttd-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
 kubectl create job --from=cronjob/ttd-twi-feed-ingest-cronjob ttd-twi-feed-ingest-cronjob-${RANDOM} -n $NS 

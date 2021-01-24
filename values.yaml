@@ -7,8 +7,10 @@ twi:
   pinboard:  
     token: pinboard-token
   ingest: 
+    twitter: 
+      mappings: ""
     feed:
-      mappings: "{   }"
+      mappings: ""
     tags :
       ingest: ingest-ready
       ingested : ingest-done 
