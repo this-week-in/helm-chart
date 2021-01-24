@@ -24,7 +24,7 @@ For an up-to-date example, please consult `install.sh`. Here's what using only t
 
 ```shell
 
-helm upgrade --values ./values.yaml  \
+helm install --values ./values.yaml  \
  --set twi.prefix=$NS   \
  --set twi.ingest.tags.ingest=$INGEST_TAG \
  --set twi.ingest.tags.ingested=$INGESTED_TAG \
