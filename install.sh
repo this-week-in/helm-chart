@@ -33,8 +33,8 @@ helm upgrade --values ./values.yaml  \
  --set twi.pinboard.token=$PINBOARD_TOKEN \
  --set twi.twitter.client_key=${TWITTER_CLIENT_KEY} \
  --set twi.twitter.client_key_secret=${TWITTER_CLIENT_KEY_SECRET} \
- --set twi.ingest.feed.mappings="$( cat $HOME/Desktop/feed-mappings.json | base64 )" \
- --set twi.ingest.twitter.mappings="$( cat $HOME/Desktop/ttd-twitter-mappings.json | base64 )" \
+ --set twi.ingest.feed.mappings=$INGEST_FEED_ENCODED_MAPPINGS \
+ --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS \
  --namespace $NS  \
  twi-${NS}-helm-chart . 
 
