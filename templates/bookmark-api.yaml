@@ -59,7 +59,7 @@ metadata:
   annotations:
     ingress.kubernetes.io/force-ssl-redirect: "true"
     networking.gke.io/managed-certificates: "{{ .Values.twi.prefix }}-twi-bookmark-api-certificate"
-    kubernetes.io/ingress.global-static-ip-name: "{{ .Values.twi.prefix }}-twi-api-ip"
+    kubernetes.io/ingress.global-static-ip-name: "{{ .Values.twi.prefix }}-twi-bookmark-api-ip"
   name: {{ .Values.twi.prefix }}-twi-bookmark-api-ingress
 spec:
   rules:

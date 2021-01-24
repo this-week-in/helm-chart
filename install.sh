@@ -1,24 +1,27 @@
 #!/usr/bin/env bash 
 
-
-
 NS=$TWI_NS
+CHART_NAME=twi-${NS}-helm-chart 
 
 function create_ip(){
     IPN=$1
     gcloud compute addresses list --format json | jq '.[].name' -r | grep $IPN || gcloud compute addresses create $IPN --global
 }
 
-
 function init(){
     create_ip ${NS}-twi-studio-ip 
-    create_ip ${NS}-twi-api-ip 
+    create_ip ${NS}-twi-bookmark-api-ip 
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
 init 
 
-helm upgrade --values ./values.yaml  \
+
+HELM_COMMAND="install"
+helm list -n $NS | grep $CHART_NAME  && HELM_COMMAND="upgrade" 
+echo "Performing a helm ${HELM_COMMAND}..."
+
+helm  $HELM_COMMAND   --values ./values.yaml  \
  --set twi.prefix=$NS   \
  --set twi.domain=$TWI_DOMAIN  \
  --set twi.postgres.username=$DB_USER  \
@@ -36,8 +39,7 @@ helm upgrade --values ./values.yaml  \
  --set twi.ingest.feed.mappings=$INGEST_FEED_ENCODED_MAPPINGS \
  --set twi.ingest.twitter.mappings=$INGEST_TWITTER_ENCODED_MAPPINGS \
  --namespace $NS  \
- twi-${NS}-helm-chart . 
-
+ $CHART_NAME . 
 
 # TODO restore this _AFTER_ youve ensured youre reading config in the same way as you are feed ingest configuration
 kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
