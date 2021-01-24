@@ -23,6 +23,7 @@ This Helm chart assumes that you've configured a Redis and a PostgreSQL instance
 
 For an up-to-date and more realistic example, please consult `install.sh`. Here's what using only the Helm chart looks like.
 
+
 ```shell
 helm install --values ./values.yaml  \
  --set twi.prefix=$NS   \
