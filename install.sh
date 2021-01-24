@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 
-source $HOME/Desktop/ttd-env.sh
+
 
 NS=$TWI_NS
 
@@ -43,9 +43,9 @@ helm upgrade --values ./values.yaml  \
 
 
 # TODO restore this _AFTER_ youve ensured youre reading config in the same way as you are feed ingest configuration
-kubectl create job --from=cronjob/ttd-twi-twitter-ingest-cronjob ttd-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
-kubectl create job --from=cronjob/ttd-twi-bookmark-ingest-cronjob ttd-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
-kubectl create job --from=cronjob/ttd-twi-feed-ingest-cronjob ttd-twi-feed-ingest-cronjob-${RANDOM} -n $NS 
+kubectl create job --from=cronjob/${NS}-twi-twitter-ingest-cronjob ${NS}-twi-twitter-ingest-cronjob-${RANDOM} -n $NS 
+kubectl create job --from=cronjob/${NS}-twi-bookmark-ingest-cronjob ${NS}-twi-bookmark-ingest-cronjob-${RANDOM} -n $NS 
+kubectl create job --from=cronjob/${NS}-twi-feed-ingest-cronjob ${NS}-twi-feed-ingest-cronjob-${RANDOM} -n $NS 
 
 #  --generate-name . 
 #  --dry-run \
