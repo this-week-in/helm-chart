@@ -16,10 +16,7 @@ function init(){
     kubectl get ns/$NS || kubectl create namespace ${NS} 
 }
 
-# TODO restore the following three lines!
 init 
-
-
 
 helm upgrade --values ./values.yaml  \
  --set twi.prefix=$NS   \
