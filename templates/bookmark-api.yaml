@@ -39,8 +39,8 @@ spec:
             requests:
               memory: "2Gi"
 ---
-apiVersion: "v1"
-kind: "Service"
+apiVersion:  v1 
+kind:  Service 
 metadata:
   name:  {{ .Values.twi.prefix }}-twi-bookmark-api-service
   annotations:
@@ -53,7 +53,7 @@ spec:
     app:  {{ .Values.twi.prefix }}-twi-bookmark-api
   type: LoadBalancer
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -70,7 +70,7 @@ spec:
               serviceName: {{ .Values.twi.prefix }}-twi-bookmark-api-service
               servicePort: 80
 ---
-apiVersion: networking.gke.io/v1beta2
+apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
   name: {{ .Values.twi.prefix }}-twi-bookmark-api-certificate
