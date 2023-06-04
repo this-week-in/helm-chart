@@ -37,4 +37,4 @@ jobs:
           kubectl get pods
 
       - name: Deploy
-        run: gsutil || echo "there is no gsutil"
+        run: cd $GITHUB_WORKSPACE/.github/workflows/ && ./deploy.sh

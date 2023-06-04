@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: {{ .Values.twi.prefix }}-twi-bookmark-ingest-job-container
-              image: gcr.io/bootiful/twi-bookmark-ingest-job:latest
+              image: gcr.io/pgtm-jlong/twi-bookmark-ingest-job:latest
               imagePullPolicy: Always
               envFrom:
                 - configMapRef:
